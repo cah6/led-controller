@@ -1,0 +1,46 @@
+buildscript {
+    ext.kotlin_version = '1.0.4'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+//    flatDir {
+//        dirs 'lib'
+//    }
+}
+
+dependencies {
+    compile 'io.reactivex:rxjava:1.2.2'
+    compile 'io.reactivex:rxjava-async-util:0.21.0'
+    compile 'org.mockito:mockito-all:1.9.5'
+    compile 'org.glassfish.tyrus.bundles:tyrus-standalone-client-jdk:1.13'
+    // compile name: 'TarsosDSP-2.3'
+    // compile fileTree(dir: 'lib', include: ['*.java'])
+
+    testCompile 'junit:junit:4.12'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDirs = ['src/main']
+        }
+    }
+    test {
+        kotlin {
+            srcDirs = ['src/test']
+        }
+    }
+}
