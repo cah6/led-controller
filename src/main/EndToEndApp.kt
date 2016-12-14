@@ -71,8 +71,3 @@ fun main(args: Array<String>) {
 
     latch.await()
 }
-
-fun intToByteArray(value: Int): ByteArray {
-    val list: List<Color> = (1..numLeds).map { it -> Color(value, value, value)}
-    return LedController.writeData(list)
-}

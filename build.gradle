@@ -14,18 +14,16 @@ apply plugin: 'kotlin'
 
 repositories {
     mavenCentral()
-//    flatDir {
-//        dirs 'lib'
-//    }
+    flatDir {
+        dirs 'lib'
+    }
 }
 
 dependencies {
     compile 'io.reactivex:rxjava:1.2.2'
     compile 'io.reactivex:rxjava-async-util:0.21.0'
     compile 'org.mockito:mockito-all:1.9.5'
-    compile 'org.glassfish.tyrus.bundles:tyrus-standalone-client-jdk:1.13'
-    // compile name: 'TarsosDSP-2.3'
-    // compile fileTree(dir: 'lib', include: ['*.java'])
+    compile name: 'TarsosDSP-2.3'
 
     testCompile 'junit:junit:4.12'
 

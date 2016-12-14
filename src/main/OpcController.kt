@@ -23,7 +23,6 @@ class OpcController(opcHost: String, opcPort: Int, numLeds: Int) {
 
     fun connectToStream(colorStream: Observable<List<Color>>) {
         colorStream.subscribe {
-            // println("Sending $it.")
             assert(strip.pixelCount == it.size)
 
             for (numLed in 0 until numLeds) {
