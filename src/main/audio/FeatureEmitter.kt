@@ -1,4 +1,4 @@
-
+package audio
 import be.tarsos.dsp.AudioEvent
 import be.tarsos.dsp.AudioProcessor
 import be.tarsos.dsp.pitch.PitchDetectionResult
@@ -12,7 +12,7 @@ class FeatureEmitter(val analysisSubject: Subject<FrameData, FrameData>) : Audio
     override fun process(audioEvent: AudioEvent): Boolean {
         frameData.volume = audioEvent.rms * 30
 
-        // println("Processed frame, calculated $frameData")
+        // println("Processed frame, calculated $audio.getFrameData")
         // println("Processed audio and sending rms level of ${audioEvent.rms}")
 
         analysisSubject.onNext(frameData)

@@ -1,4 +1,4 @@
-
+package audio
 import be.tarsos.dsp.AudioDispatcher
 import be.tarsos.dsp.AudioEvent
 import be.tarsos.dsp.AudioProcessor
@@ -7,11 +7,13 @@ import be.tarsos.dsp.onsets.OnsetHandler
 import be.tarsos.dsp.onsets.PercussionOnsetDetector
 import be.tarsos.dsp.pitch.PitchDetectionResult
 import be.tarsos.dsp.pitch.PitchProcessor
+import bufferSize
 import rx.Observable
 import rx.Subscriber
 import rx.subjects.PublishSubject
 import rx.subjects.Subject
 import rx.util.async.Async
+import sampleRate
 import java.io.File
 import javax.sound.sampled.AudioFormat
 
@@ -21,7 +23,6 @@ import javax.sound.sampled.AudioFormat
 data class BeatResult(val isDetected: Boolean, val beatStrength: Double)
 data class FrameData(var pitchResult: PitchDetectionResult, var beatResult: BeatResult, var volume: Double)
 val frameData = FrameData(PitchDetectionResult(), BeatResult(false, 0.0), 0.0)
-// fun AudioEvent.getFrameData(): FrameData = frameData
 
 class FeatureExtractor(val audioDispatcher: AudioDispatcher, vararg val audioProcessors: AudioProcessor) {
 
@@ -76,7 +77,7 @@ class FeatureExtractor(val audioDispatcher: AudioDispatcher, vararg val audioPro
         fun makeOnsetProcessor(sampleRate: Float, bufferSize: Int): AudioProcessor {
             return PercussionOnsetDetector(sampleRate, bufferSize, OnsetHandler { time: Double, salience: Double ->
                 println("Onset with salience $salience at time $time")
-                // frameData.beatResult = BeatResult(true, salience)
+                // audio.getFrameData.beatResult = audio.BeatResult(true, salience)
 
             }, 40.0, 0.5)
         }
