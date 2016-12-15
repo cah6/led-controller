@@ -1,5 +1,5 @@
+package audio
 
-import audio.FeatureExtractor
 import be.tarsos.dsp.AudioDispatcher
 import be.tarsos.dsp.AudioEvent
 import be.tarsos.dsp.AudioProcessor

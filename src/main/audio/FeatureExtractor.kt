@@ -21,8 +21,8 @@ import javax.sound.sampled.AudioFormat
  * Created by christian.henry on 11/21/16.
  */
 data class BeatResult(val isDetected: Boolean, val beatStrength: Double)
-data class FrameData(var pitchResult: PitchDetectionResult, var beatResult: BeatResult, var volume: Double)
-val frameData = FrameData(PitchDetectionResult(), BeatResult(false, 0.0), 0.0)
+data class FrameData(var pitchResult: PitchDetectionResult, var volume: Double)
+val frameData = FrameData(PitchDetectionResult(), 0.0)
 
 class FeatureExtractor(val audioDispatcher: AudioDispatcher, vararg val audioProcessors: AudioProcessor) {
 
