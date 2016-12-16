@@ -45,10 +45,9 @@ class FeatureExtractorTest {
 
     @Test
     fun testRealProcessors() {
-        val onsetProcessor = FeatureExtractor.makeOnsetProcessor(sampleRate, bufferSize)
         val pitchProcessor = FeatureExtractor.makePitchProcessor(sampleRate, bufferSize, PitchProcessor.PitchEstimationAlgorithm.FFT_YIN)
 
-        var target: FeatureExtractor = FeatureExtractor(makeTestDispatcher(oneFrameInput), onsetProcessor, pitchProcessor)
+        var target: FeatureExtractor = FeatureExtractor(makeTestDispatcher(oneFrameInput), pitchProcessor)
         val subject = target.startProcessing()
     }
 

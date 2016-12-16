@@ -1,4 +1,5 @@
 
+import audio.Dispatchers
 import audio.FeatureExtractor
 import audio.FrameData
 import led.OpcController
@@ -9,13 +10,11 @@ import java.util.concurrent.CountDownLatch
  * Created by christian.henry on 12/13/16.
  */
 
-val microphoneDispatcher = FeatureExtractor.makeDefaultDispatcher()
-
 fun main(args: Array<String>) {
     val latch: CountDownLatch = CountDownLatch(1)
 
     val featureExtractor: FeatureExtractor = FeatureExtractor(
-            microphoneDispatcher,
+            Dispatchers.fromDefaultMicrophone(),
             FeatureExtractor.makePitchProcessor(sampleRate, bufferSize, pitchAlgorithm))
     val subject: Subject<FrameData, FrameData> = featureExtractor.startProcessing()
 

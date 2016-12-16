@@ -3,8 +3,6 @@ import be.tarsos.dsp.AudioDispatcher
 import be.tarsos.dsp.AudioEvent
 import be.tarsos.dsp.AudioProcessor
 import be.tarsos.dsp.io.jvm.AudioDispatcherFactory
-import be.tarsos.dsp.onsets.OnsetHandler
-import be.tarsos.dsp.onsets.PercussionOnsetDetector
 import be.tarsos.dsp.pitch.PitchDetectionResult
 import be.tarsos.dsp.pitch.PitchProcessor
 import bufferSize
@@ -15,7 +13,6 @@ import rx.subjects.Subject
 import rx.util.async.Async
 import sampleRate
 import java.io.File
-import javax.sound.sampled.AudioFormat
 
 /**
  * Created by christian.henry on 11/21/16.
@@ -55,32 +52,7 @@ class FeatureExtractor(val audioDispatcher: AudioDispatcher, vararg val audioPro
 
     companion object {
 
-        fun makeDefaultDispatcher(): AudioDispatcher {
-            val fromDefaultMicrophone = AudioDispatcherFactory.fromDefaultMicrophone(sampleRate.toInt(), bufferSize, bufferSize / 2)
-            println("Format used is ${fromDefaultMicrophone.format}")
-            return fromDefaultMicrophone
-        }
 
-        fun dispatcherFromBytes(fileLocation: String): AudioDispatcher {
-            val file = File(fileLocation)
-            val fileAsBytes = file.readBytes()
-            val audioFormat = AudioFormat(sampleRate, 8, 2, true, true)
-
-            return AudioDispatcherFactory.fromByteArray(fileAsBytes, audioFormat, bufferSize, bufferSize / 2)
-        }
-
-        fun dispatcherFromFile(fileLocation: String): AudioDispatcher {
-            val file = File(fileLocation)
-            return AudioDispatcherFactory.fromFile(file, bufferSize, bufferSize / 2)
-        }
-
-        fun makeOnsetProcessor(sampleRate: Float, bufferSize: Int): AudioProcessor {
-            return PercussionOnsetDetector(sampleRate, bufferSize, OnsetHandler { time: Double, salience: Double ->
-                println("Onset with salience $salience at time $time")
-                // audio.getFrameData.beatResult = audio.BeatResult(true, salience)
-
-            }, 40.0, 0.5)
-        }
 
         fun makePitchProcessor(sampleRate: Float, bufferSize: Int, algo: PitchProcessor.PitchEstimationAlgorithm): AudioProcessor {
             return PitchProcessor(algo, sampleRate, bufferSize) {
