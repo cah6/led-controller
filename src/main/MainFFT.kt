@@ -1,4 +1,3 @@
-
 import audio.AudioProcessors
 import audio.Dispatchers
 import audio.FeatureExtractor
@@ -8,7 +7,7 @@ import rx.subjects.Subject
 import java.util.concurrent.CountDownLatch
 
 /**
- * Created by christian.henry on 12/13/16.
+ * Created by christian.henry on 12/21/16.
  */
 
 fun main(args: Array<String>) {
@@ -16,10 +15,10 @@ fun main(args: Array<String>) {
 
     val featureExtractor: FeatureExtractor = FeatureExtractor(
             Dispatchers.fromDefaultMicrophone(),
-            AudioProcessors.defaultPitchProcessor(sampleRate, bufferSize, pitchAlgorithm))
+            AudioProcessors.defaultFftProcessor(bufferSize))
     val subject: Subject<SingleFrameAudioData, SingleFrameAudioData> = featureExtractor.startProcessing()
 
-    val ledStream = subjectToFinalStream(subject)
+    val ledStream = pitchToFinalStream(subject)
 
     val controller: OpcController = OpcController(opcHost, opcPort, numLeds)
     controller.connectToStream(ledStream)

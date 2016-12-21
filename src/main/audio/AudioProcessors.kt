@@ -21,4 +21,8 @@ object AudioProcessors {
         }
     }
 
+    fun defaultFftProcessor(bufferSize: Int): AudioProcessor {
+        return FFTProcessor(bufferSize)
+    }
+
 }

@@ -32,7 +32,7 @@ class EndToEndTest {
                 testFileDispatcher,
                 AudioProcessors.defaultPitchProcessor(sampleRate, bufferSize, pitchAlgorithm))
         val subject: Subject<SingleFrameAudioData, SingleFrameAudioData> = featureExtractor.startProcessing()
-        val ledStream = subjectToFinalStream(subject)
+        val ledStream = pitchToFinalStream(subject)
         val controller: OpcController = OpcController(opcHost, opcPort, numLeds)
         controller.connectToStream(ledStream)
 

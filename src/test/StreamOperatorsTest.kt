@@ -28,7 +28,7 @@ class StreamOperatorsTest {
         val repeatedDefaultFrameData = (1..numEvents).map { defaultFrameData }
         val defaultObservable = Observable.from(repeatedDefaultFrameData)
 
-        val result = subjectToFinalStream(defaultObservable)
+        val result = pitchToFinalStream(defaultObservable)
 
         val testSubscriber = TestSubscriber<List<Color>>()
 

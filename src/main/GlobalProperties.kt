@@ -16,4 +16,4 @@ val smoothWindowSize = 3
 val pitchAlgorithm = PitchProcessor.PitchEstimationAlgorithm.YIN
 
 // Currently global so that various audio processors can share. Should lock down more.
-val frameData = SingleFrameAudioData(PitchDetectionResult(), 0.0)
+val frameData = SingleFrameAudioData(PitchDetectionResult(), 0.0, listOf())

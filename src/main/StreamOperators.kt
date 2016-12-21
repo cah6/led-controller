@@ -9,7 +9,21 @@ import java.awt.Color
 
 private data class VolumeAndPitch(val volume: Double, val pitch: Double)
 
-fun subjectToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<Color>> {
+fun fftToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<Color>> {
+    return input
+            .map { it.frequencyData }
+            .map { val max = it.size; it.map { Math.abs(it) / max } }
+            .map(::magnitudesToColor)
+}
+
+fun magnitudesToColor(magnitudes: List<Float>): List<Color> {
+    val maxAmplitude = 1.0f
+    magnitudes.map {
+        Color(maxAmplitude - it, 0f, it)
+    }
+}
+
+fun pitchToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<Color>> {
     return input
             .map(::preProcessFrameData)
             .map(::audioDataToColor)
