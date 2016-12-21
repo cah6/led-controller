@@ -1,5 +1,5 @@
 
-import audio.FrameData
+import audio.SingleFrameAudioData
 import rx.Observable
 import java.awt.Color
 
@@ -9,7 +9,7 @@ import java.awt.Color
 
 private data class VolumeAndPitch(val volume: Double, val pitch: Double)
 
-fun subjectToFinalStream(input: Observable<FrameData>): Observable<List<Color>> {
+fun subjectToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<Color>> {
     return input
             .map(::preProcessFrameData)
             .map(::audioDataToColor)
@@ -18,9 +18,9 @@ fun subjectToFinalStream(input: Observable<FrameData>): Observable<List<Color>> 
             .map(::repeatColorToAllLeds)
 }
 
-private fun preProcessFrameData(frameData: FrameData): VolumeAndPitch {
-    if (frameData.pitchResult.isPitched && frameData.pitchResult.probability > 0.85f) {
-        return VolumeAndPitch(frameData.volume, frameData.pitchResult.pitch.toDouble())
+private fun preProcessFrameData(singleFrameAudioData: SingleFrameAudioData): VolumeAndPitch {
+    if (singleFrameAudioData.pitchResult.isPitched && singleFrameAudioData.pitchResult.probability > 0.85f) {
+        return VolumeAndPitch(singleFrameAudioData.volume, singleFrameAudioData.pitchResult.pitch.toDouble())
     } else {
         return VolumeAndPitch(0.0, 0.0)
     }

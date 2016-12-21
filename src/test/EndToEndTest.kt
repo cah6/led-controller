@@ -1,7 +1,8 @@
 
+import audio.AudioProcessors
 import audio.Dispatchers
 import audio.FeatureExtractor
-import audio.FrameData
+import audio.SingleFrameAudioData
 import led.OpcController
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
@@ -29,8 +30,8 @@ class EndToEndTest {
     fun test1() {
         val featureExtractor: FeatureExtractor = FeatureExtractor(
                 testFileDispatcher,
-                FeatureExtractor.makePitchProcessor(sampleRate, bufferSize, pitchAlgorithm))
-        val subject: Subject<FrameData, FrameData> = featureExtractor.startProcessing()
+                AudioProcessors.defaultPitchProcessor(sampleRate, bufferSize, pitchAlgorithm))
+        val subject: Subject<SingleFrameAudioData, SingleFrameAudioData> = featureExtractor.startProcessing()
         val ledStream = subjectToFinalStream(subject)
         val controller: OpcController = OpcController(opcHost, opcPort, numLeds)
         controller.connectToStream(ledStream)

@@ -45,7 +45,7 @@ class FeatureExtractorTest {
 
     @Test
     fun testRealProcessors() {
-        val pitchProcessor = FeatureExtractor.makePitchProcessor(sampleRate, bufferSize, PitchProcessor.PitchEstimationAlgorithm.FFT_YIN)
+        val pitchProcessor = AudioProcessors.defaultPitchProcessor(sampleRate, bufferSize, PitchProcessor.PitchEstimationAlgorithm.FFT_YIN)
 
         var target: FeatureExtractor = FeatureExtractor(makeTestDispatcher(oneFrameInput), pitchProcessor)
         val subject = target.startProcessing()

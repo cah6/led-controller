@@ -1,5 +1,5 @@
 
-import audio.FrameData
+import audio.SingleFrameAudioData
 import be.tarsos.dsp.pitch.PitchDetectionResult
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
@@ -13,7 +13,7 @@ import java.awt.Color
  */
 class StreamOperatorsTest {
 
-    val defaultFrameData = FrameData(PitchDetectionResult(), 0.0)
+    val defaultFrameData = SingleFrameAudioData(PitchDetectionResult(), 0.0)
 
     @Test
     fun deleteMe() {
