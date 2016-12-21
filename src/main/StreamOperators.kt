@@ -18,7 +18,7 @@ fun fftToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<C
 
 fun magnitudesToColor(magnitudes: List<Float>): List<Color> {
     val maxAmplitude = 1.0f
-    magnitudes.map {
+    return magnitudes.map {
         Color(maxAmplitude - it, 0f, it)
     }
 }

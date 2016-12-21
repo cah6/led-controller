@@ -13,7 +13,7 @@ import java.awt.Color
  */
 class StreamOperatorsTest {
 
-    val defaultFrameData = SingleFrameAudioData(PitchDetectionResult(), 0.0)
+    val defaultFrameData = SingleFrameAudioData(PitchDetectionResult(), 0.0, listOf())
 
     @Test
     fun deleteMe() {
