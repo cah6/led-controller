@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
             AudioProcessors.defaultFftProcessor(bufferSize))
     val subject: Subject<SingleFrameAudioData, SingleFrameAudioData> = featureExtractor.startProcessing()
 
-    val ledStream = pitchToFinalStream(subject)
+    val ledStream = fftToFinalStream(subject)
 
     val controller: OpcController = OpcController(opcHost, opcPort, numLeds)
     controller.connectToStream(ledStream)

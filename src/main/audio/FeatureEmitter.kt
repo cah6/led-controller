@@ -19,6 +19,7 @@ class FeatureEmitter(val analysisSubject: Subject<SingleFrameAudioData, SingleFr
         // reset global frameData
         frameData.pitchResult = PitchDetectionResult()
         frameData.volume = 0.0
+        frameData.frequencyData = listOf()
         return true
     }
 

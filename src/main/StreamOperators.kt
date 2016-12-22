@@ -12,14 +12,22 @@ private data class VolumeAndPitch(val volume: Double, val pitch: Double)
 fun fftToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<Color>> {
     return input
             .map { it.frequencyData }
-            .map { val max = it.size; it.map { Math.abs(it) / max } }
+            .map{ it.map { Math.abs(it) } }
+            .map(::scaleMagnitudes)
+            .map { FrequencyBinMapper.linFFTBinsToNumLeds(it, numLeds) }
             .map(::magnitudesToColor)
 }
 
-fun magnitudesToColor(magnitudes: List<Float>): List<Color> {
+private fun scaleMagnitudes(fftValues: List<Float>): List<Float> {
+    val max = fftValues.size;
+    return fftValues.map { it / 1500 }
+}
+
+private fun magnitudesToColor(magnitudes: List<Float>): List<Color> {
     val maxAmplitude = 1.0f
     return magnitudes.map {
-        Color(maxAmplitude - it, 0f, it)
+        val safeMagnitude = Math.min(1.0, it.toDouble()).toFloat()
+        Color(maxAmplitude - safeMagnitude, 0f, safeMagnitude)
     }
 }
 

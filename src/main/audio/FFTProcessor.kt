@@ -8,7 +8,7 @@ import frameData
 /**
  * Created by christian.henry on 12/20/16.
  */
-class FFTProcessor(val size: Int) : AudioProcessor {
+class FFTProcessor(size: Int) : AudioProcessor {
 
     private val fft: FFT = FFT(size)
 
