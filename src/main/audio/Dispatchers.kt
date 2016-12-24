@@ -12,7 +12,7 @@ import java.io.File
 object Dispatchers {
 
     fun fromDefaultMicrophone(): AudioDispatcher {
-        val fromDefaultMicrophone = AudioDispatcherFactory.fromDefaultMicrophone(sampleRate.toInt(), bufferSize, bufferSize / 2)
+        val fromDefaultMicrophone = AudioDispatcherFactory.fromDefaultMicrophone(sampleRate.toInt(), bufferSize, bufferSize * 3 / 4)
         println("Format used is ${fromDefaultMicrophone.format}")
         return fromDefaultMicrophone
     }

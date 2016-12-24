@@ -2,6 +2,7 @@ package audio
 
 import be.tarsos.dsp.AudioEvent
 import be.tarsos.dsp.AudioProcessor
+import be.tarsos.dsp.util.fft.BlackmanWindow
 import be.tarsos.dsp.util.fft.FFT
 import frameData
 
@@ -10,7 +11,7 @@ import frameData
  */
 class FFTProcessor(size: Int) : AudioProcessor {
 
-    private val fft: FFT = FFT(size)
+    private val fft: FFT = FFT(size, BlackmanWindow())
 
     override fun process(p0: AudioEvent): Boolean {
         val result: FloatArray = p0.floatBuffer.copyOf()

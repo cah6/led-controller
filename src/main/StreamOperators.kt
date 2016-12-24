@@ -1,4 +1,5 @@
 
+import Mag2Color.magnitudeToColor
 import audio.SingleFrameAudioData
 import rx.Observable
 import java.awt.Color
@@ -12,22 +13,14 @@ private data class VolumeAndPitch(val volume: Double, val pitch: Double)
 fun fftToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<Color>> {
     return input
             .map { it.frequencyMagnitudes }
-            .map(::scaleMagnitudes)
-            .map { FrequencyBinMapper.linFFTBinsToNumLeds(it, numLeds) }
-            .map(::magnitudesToColor)
+            .map(::scaleMagnitudes) // todo: before or after doing log conversion?
+            .map { FrequencyBinMapper.logFftBinsToNumLeds(it, numLeds) }
+            .map{ it.map { magnitudeToColor(it) } }
 }
 
 private fun scaleMagnitudes(fftValues: List<Float>): List<Float> {
     val max = fftValues.size
-    return fftValues.map { it / 2048 }
-}
-
-private fun magnitudesToColor(magnitudes: List<Float>): List<Color> {
-    val maxAmplitude = 1.0f
-    return magnitudes.map {
-        val safeMagnitude = Math.min(1.0, it.toDouble()).toFloat()
-        Color(maxAmplitude - safeMagnitude, 0f, safeMagnitude)
-    }
+    return fftValues.map { it / 16 }
 }
 
 fun pitchToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<Color>> {
