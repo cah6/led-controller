@@ -8,4 +8,4 @@ import be.tarsos.dsp.pitch.PitchDetectionResult
 data class SingleFrameAudioData(
         var pitchResult: PitchDetectionResult,
         var volume: Double,
-        var frequencyData: List<Float>)
+        var frequencyMagnitudes: List<Float>)

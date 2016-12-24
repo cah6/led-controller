@@ -11,6 +11,7 @@ import rx.subjects.Subject
 class FeatureEmitter(val analysisSubject: Subject<SingleFrameAudioData, SingleFrameAudioData>) : AudioProcessor {
 
     override fun process(audioEvent: AudioEvent): Boolean {
+        audioEvent.getdBSPL()
         // push volume up to be between 0 and 1 normally
         frameData.volume = audioEvent.rms * 6
 
@@ -19,7 +20,7 @@ class FeatureEmitter(val analysisSubject: Subject<SingleFrameAudioData, SingleFr
         // reset global frameData
         frameData.pitchResult = PitchDetectionResult()
         frameData.volume = 0.0
-        frameData.frequencyData = listOf()
+        frameData.frequencyMagnitudes = listOf()
         return true
     }
 

@@ -8,18 +8,15 @@ import org.junit.Test
 class FrequencyBinMapperTest {
 
     @Test
-    fun deleteMe() {
-        assertTrue(true)
-        assertEquals(1, 1)
-        assertThat(1, equalTo(1))
-    }
-
-    @Test
     fun testAllOnes() {
         val fftData = (1..4096).map { 1.0f }
         val leds = FrequencyBinMapper.logFftBinsToNumLeds(fftData, 60)
 
         assertThat(leds.size, equalTo(60))
+        for (i in 0..(leds.size - 2)) {
+            assertTrue(leds[i + 1] > leds[i])
+        }
+
         println(leds)
     }
 
@@ -47,6 +44,13 @@ class FrequencyBinMapperTest {
         val leds = FrequencyBinMapper.linFFTBinsToNumLeds(fftData, 60)
 
         assertThat(leds.size, equalTo(60))
+    }
+
+    @Test
+    fun testSumWithScaledBoundaries() {
+        val values = listOf(2.0f, 1.0f, 2.0f, 3.0f, 1.0f)
+        val sum = FrequencyBinMapper.sumWithScaledBoundaries(values, 0.25, 0.5)
+        assertThat(sum, equalTo(7.0f))
     }
 
 }

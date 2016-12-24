@@ -37,6 +37,30 @@ class FFTTest {
     }
 
     @Test
+    fun testSquareTwoPeriod() {
+        val target: FFT = FFT(8)
+
+        val data = listOf(1f, 1f, 0f, 0f, 1f, 1f, 0f, 0f).toFloatArray()
+        val result = data.copyOf()
+
+        target.forwardTransform(result)
+
+        println(result)
+    }
+
+    @Test
+    fun testSquareOnePeriod() {
+        val target: FFT = FFT(8)
+
+        val data = listOf(1f, 1f, 1f, 1f, 0f, 0f, 0f, 0f).toFloatArray()
+        val result = data.copyOf()
+
+        target.forwardTransform(result)
+
+        println(result)
+    }
+
+    @Test
     fun testConstant() {
         val target: FFT = FFT(4)
 
