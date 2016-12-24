@@ -1,6 +1,5 @@
 package led
 import numLeds
-import opc.MyAnimation
 import opc.OpcClient
 import opc.OpcDevice
 import opc.PixelStrip
@@ -32,19 +31,6 @@ class OpcController(opcHost: String, opcPort: Int, numLeds: Int) {
 
             server.show()
         }
-    }
-
-    fun testLeds() {
-        (0 until numLeds).forEach { strip.setPixelColor(it, Color.WHITE.rgb) }
-        server.show()
-        Thread.sleep(5000)
-        strip.clear()
-        server.show()
-    }
-
-    fun animate() {
-        strip.animation = MyAnimation()
-        server.animate()
     }
 
 }
