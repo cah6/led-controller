@@ -1,6 +1,9 @@
-
+package audio2led
 import audio.SingleFrameAudioData
+import audio2led.AudioStreamOperators.fftToFinalStream
 import be.tarsos.dsp.pitch.PitchDetectionResult
+import bufferSize
+import numLeds
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
 import org.junit.Test
@@ -11,16 +14,9 @@ import java.awt.Color
 /**
  * Created by christian.henry on 12/15/16.
  */
-class StreamOperatorsTest {
-
-    val defaultFrameData = SingleFrameAudioData(PitchDetectionResult(), 0.0, listOf())
-
-    @Test
-    fun deleteMe() {
-        assertTrue(true)
-        assertEquals(1, 1)
-        assertThat(1, equalTo(1))
-    }
+class AudioStreamOperatorsTest {
+    val emptyFFTData = (1..bufferSize/2).map { 0f }
+    val defaultFrameData = SingleFrameAudioData(PitchDetectionResult(), 0.0, emptyFFTData)
 
     @Test
     fun testNoDataAllBlack() {
@@ -28,7 +24,7 @@ class StreamOperatorsTest {
         val repeatedDefaultFrameData = (1..numEvents).map { defaultFrameData }
         val defaultObservable = Observable.from(repeatedDefaultFrameData)
 
-        val result = pitchToFinalStream(defaultObservable)
+        val result = fftToFinalStream(defaultObservable)
 
         val testSubscriber = TestSubscriber<List<Color>>()
 

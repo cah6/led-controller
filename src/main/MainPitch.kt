@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
 
     val ledStream = pitchToFinalStream(subject)
 
-    val controller: OpcController = OpcController(opcHost, opcPort, numLeds)
+    val controller: OpcController = OpcController(opcHost, opcPort, ledStripSetup)
     controller.connectToStream(ledStream)
 
     latch.await()

@@ -1,6 +1,8 @@
 package audio2led
 
 import audio.Lin2LogConverter
+import bufferSize
+import sampleRate
 
 /**
  * Created by christian.henry on 12/22/16.

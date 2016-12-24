@@ -11,6 +11,7 @@ val opcPort = 7890
 val sampleRate = 44100f
 val bufferSize = 1024 * 4
 val numLeds = 60
+val ledStripSetup = mapOf(Pair(0, numLeds), Pair(1, numLeds))
 
 val smoothWindowSize = 3
 val pitchAlgorithm = PitchProcessor.PitchEstimationAlgorithm.YIN

@@ -1,5 +1,4 @@
 package led
-import numLeds
 import opc.OpcClient
 import opc.OpcDevice
 import opc.PixelStrip
@@ -9,24 +8,28 @@ import java.awt.Color
 /**
  * Created by christian.henry on 11/29/16.
  */
-class OpcController(opcHost: String, opcPort: Int, numLeds: Int) {
+class OpcController(opcHost: String, opcPort: Int, ledStripSetup: Map<Int, Int>) {
 
     val server: OpcClient
     val display: OpcDevice
-    val strip: PixelStrip
+    val ledStrips: List<PixelStrip>
 
     init {
         server = OpcClient(opcHost, opcPort)
         display = server.addDevice()
-        strip = display.addPixelStrip(0, numLeds)
+        ledStrips = ledStripSetup.map { it ->
+            display.addPixelStrip(it.key, it.value)
+        }
     }
 
     fun connectToStream(colorStream: Observable<List<Color>>) {
-        colorStream.subscribe {
-            assert(strip.pixelCount == it.size)
+        colorStream.subscribe { ledColors ->
+            assert(ledStrips[0].pixelCount == ledColors.size)
 
-            for (numLed in 0 until numLeds) {
-                strip.setPixelColor(numLed, it[numLed].rgb)
+            ledStrips.forEach {
+                for (numLed in 0 until it.pixelCount) {
+                    it.setPixelColor(numLed, ledColors[numLed].rgb)
+                }
             }
 
             server.show()
