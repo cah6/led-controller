@@ -30,23 +30,6 @@ class FrequencyBinMapperTest {
     }
 
     @Test
-    fun testLinDistAllOnes() {
-        val fftData = (1..4096).map { 1.0f }
-        val leds = FrequencyBinMapper.linFFTBinsToNumLeds(fftData, 60)
-
-        assertThat(leds.size, equalTo(60))
-        println(leds.sum())
-    }
-
-    @Test
-    fun testLinDistDecreasing() {
-        val fftData = (4096 downTo 1).map(Int::toFloat)
-        val leds = FrequencyBinMapper.linFFTBinsToNumLeds(fftData, 60)
-
-        assertThat(leds.size, equalTo(60))
-    }
-
-    @Test
     fun testSumWithScaledBoundaries() {
         val values = listOf(2.0f, 1.0f, 2.0f, 3.0f, 1.0f)
         val sum = FrequencyBinMapper.sumWithScaledBoundaries(values, 0.25, 0.5)

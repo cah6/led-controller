@@ -6,7 +6,7 @@ import audio.Lin2LogConverter
 object FrequencyBinMapper {
 
     /**
-     * Start with bufferSize / 2 number of FFT values. Need to map this to 60 LEDs,
+     * Start with bufferSize / 2 number of FFT values. Need to map this to numLeds,
      * doing this on a log scale will make sure lower frequency ranges get adequate
      * resolution as well.
      */
@@ -65,16 +65,5 @@ object FrequencyBinMapper {
             // if not boundary, return value as is
             returnVal
         }.sum()
-    }
-
-    fun linFFTBinsToNumLeds(fftValues: List<Float>, numLeds: Int): List<Float> {
-        var currentIndex = 0
-        return (1..numLeds).map {
-            val index = Math.floor(fftValues.size / numLeds.toDouble()).toInt()
-            val newUpperIndex = Math.min(currentIndex + index, fftValues.size)
-            val sum = fftValues.subList(currentIndex, newUpperIndex).sum()
-            currentIndex = newUpperIndex
-            sum
-        }
     }
 }
