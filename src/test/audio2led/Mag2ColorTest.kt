@@ -1,5 +1,5 @@
-
-import Mag2Color.magnitudeToColor
+package audio2led
+import audio2led.Mag2Color.magnitudeToColor
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
 import org.junit.Test

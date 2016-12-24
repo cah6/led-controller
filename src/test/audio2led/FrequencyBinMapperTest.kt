@@ -1,3 +1,6 @@
+package audio2led
+
+import audio2led.FrequencyBinMapper
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
 import org.junit.Test

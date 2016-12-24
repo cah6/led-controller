@@ -1,6 +1,7 @@
 
-import Mag2Color.magnitudeToColor
 import audio.SingleFrameAudioData
+import audio2led.FrequencyBinMapper
+import audio2led.Mag2Color.magnitudeToColor
 import rx.Observable
 import java.awt.Color
 

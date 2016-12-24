@@ -1,3 +1,5 @@
+package audio2led
+
 import java.awt.Color
 
 /**
