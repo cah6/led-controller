@@ -1,6 +1,6 @@
 package audio2led
 import audio.SingleFrameAudioData
-import audio2led.AudioStreamOperators.fftToFinalStream
+import audio2led.FFTStreamOperators.fftToFinalStream
 import be.tarsos.dsp.pitch.PitchDetectionResult
 import bufferSize
 import numLeds

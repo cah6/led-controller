@@ -3,6 +3,7 @@ import audio.AudioProcessors
 import audio.Dispatchers
 import audio.FeatureExtractor
 import audio.SingleFrameAudioData
+import audio2led.PitchStreamOperators
 import led.OpcController
 import rx.subjects.Subject
 import java.util.concurrent.CountDownLatch
@@ -19,7 +20,7 @@ fun main(args: Array<String>) {
             AudioProcessors.defaultPitchProcessor(sampleRate, bufferSize, pitchAlgorithm))
     val subject: Subject<SingleFrameAudioData, SingleFrameAudioData> = featureExtractor.startProcessing()
 
-    val ledStream = pitchToFinalStream(subject)
+    val ledStream = PitchStreamOperators.pitchToFinalStream(subject)
 
     val controller: OpcController = OpcController(opcHost, opcPort, ledStripSetup)
     controller.connectToStream(ledStream)

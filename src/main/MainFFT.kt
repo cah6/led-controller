@@ -3,7 +3,7 @@ import audio.Dispatchers
 import audio.FFTProcessor
 import audio.FeatureExtractor
 import audio.SingleFrameAudioData
-import audio2led.AudioStreamOperators
+import audio2led.FFTStreamOperators
 import led.OpcController
 import rx.subjects.Subject
 import java.util.concurrent.CountDownLatch
@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
             FFTProcessor(bufferSize))
     val subject: Subject<SingleFrameAudioData, SingleFrameAudioData> = featureExtractor.startProcessing()
 
-    val ledStream = AudioStreamOperators.fftToFinalStream(subject)
+    val ledStream = FFTStreamOperators.fftToFinalStream(subject)
 
     val controller: OpcController = OpcController(opcHost, opcPort, ledStripSetup)
     controller.connectToStream(ledStream)

@@ -8,7 +8,7 @@ import java.awt.Color
 /**
  * Created by christian.henry on 12/24/16.
  */
-object AudioStreamOperators {
+object FFTStreamOperators {
 
     fun fftToFinalStream(input: Observable<SingleFrameAudioData>): Observable<List<Color>> {
         return input
