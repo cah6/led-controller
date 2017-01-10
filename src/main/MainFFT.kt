@@ -4,6 +4,7 @@ import audio.FFTProcessor
 import audio.FeatureExtractor
 import audio.SingleFrameAudioData
 import audio2led.FFTStreamOperators
+import led.DrawingController
 import led.OpcController
 import rx.subjects.Subject
 import java.util.concurrent.CountDownLatch
@@ -22,8 +23,13 @@ fun main(args: Array<String>) {
 
     val ledStream = FFTStreamOperators.fftToFinalStream(subject)
 
+    val multiLedStream = ledStream.publish()
     val controller: OpcController = OpcController(opcHost, opcPort, ledStripSetup)
-    controller.connectToStream(ledStream)
+    controller.connectToStream(multiLedStream)
 
-    latch.await()
+    val drawingController: DrawingController = DrawingController(ledStripSetup)
+    drawingController.connectToStream(multiLedStream)
+
+    println("All streams connected, waiting until program close.")
+    multiLedStream.connect()
 }

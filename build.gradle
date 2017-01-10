@@ -17,12 +17,15 @@ repositories {
     flatDir {
         dirs 'lib'
     }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
 dependencies {
     compile 'io.reactivex:rxjava:1.2.2'
     compile 'io.reactivex:rxjava-async-util:0.21.0'
     compile 'org.mockito:mockito-all:1.9.5'
+    compile 'edu.cmu.sphinx:sphinx4-core:5prealpha-SNAPSHOT'
+    compile 'edu.cmu.sphinx:sphinx4-data:5prealpha-SNAPSHOT'
     compile name: 'TarsosDSP-2.3'
 
     testCompile 'junit:junit:4.12'

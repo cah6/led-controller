@@ -20,6 +20,6 @@ object FFTStreamOperators {
 
     // todo: before or after doing log conversion?
     private fun scaleMagnitudes(fftValues: List<Float>): List<Float> {
-        return fftValues.map { it / 16 }
+        return fftValues.map { it / 100 }
     }
 }

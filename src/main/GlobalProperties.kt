@@ -5,7 +5,7 @@ import be.tarsos.dsp.pitch.PitchProcessor
 /**
  * Created by christian.henry on 12/13/16.
  */
-val opcHost = "localhost"
+val opcHost = "192.168.1.8"
 val opcPort = 7890
 
 val sampleRate = 44100f

@@ -3,6 +3,7 @@ import audio.AudioProcessors
 import audio.Dispatchers
 import audio.FeatureExtractor
 import audio.SingleFrameAudioData
+import audio2led.PitchStreamOperators.pitchToFinalStream
 import led.OpcController
 import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.*
